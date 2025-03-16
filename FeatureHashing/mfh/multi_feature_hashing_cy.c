@@ -1830,7 +1830,7 @@ typedef __pyx_t_5numpy_float64_t __pyx_t_24multi_feature_hashing_cy_DTYPE_t;
  * ctypedef np.float64_t DTYPE_t
  * ctypedef np.int64_t ITYPE_t             # <<<<<<<<<<<<<<
  * 
- * def multi_feature_hashing_cy(
+ * def mfh_transform(
  */
 typedef __pyx_t_5numpy_int64_t __pyx_t_24multi_feature_hashing_cy_ITYPE_t;
 /* #### Code section: complex_type_declarations ### */
@@ -2641,9 +2641,6 @@ static PyObject *__Pyx_PyDict_GetItem(PyObject *d, PyObject* key);
 /* BufferIndexError.proto */
 static void __Pyx_RaiseBufferIndexError(int axis);
 
-/* ModInt[__pyx_t_24multi_feature_hashing_cy_ITYPE_t].proto */
-static CYTHON_INLINE __pyx_t_24multi_feature_hashing_cy_ITYPE_t __Pyx_mod___pyx_t_24multi_feature_hashing_cy_ITYPE_t(__pyx_t_24multi_feature_hashing_cy_ITYPE_t, __pyx_t_24multi_feature_hashing_cy_ITYPE_t);
-
 /* PyObject_GenericGetAttrNoDict.proto */
 #if CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP && PY_VERSION_HEX < 0x03070000
 static CYTHON_INLINE PyObject* __Pyx_PyObject_GenericGetAttrNoDict(PyObject* obj, PyObject* attr_name);
@@ -3293,6 +3290,7 @@ static const char __pyx_k_ndim[] = "ndim";
 static const char __pyx_k_pack[] = "pack";
 static const char __pyx_k_size[] = "size";
 static const char __pyx_k_spec[] = "__spec__";
+static const char __pyx_k_sqrt[] = "sqrt";
 static const char __pyx_k_step[] = "step";
 static const char __pyx_k_stop[] = "stop";
 static const char __pyx_k_test[] = "__test__";
@@ -3364,13 +3362,16 @@ static const char __pyx_k_X_hashed_view[] = "X_hashed_view";
 static const char __pyx_k_class_getitem[] = "__class_getitem__";
 static const char __pyx_k_feature_names[] = "feature_names";
 static const char __pyx_k_feature_value[] = "feature_value";
+static const char __pyx_k_mfh_transform[] = "mfh_transform";
 static const char __pyx_k_reduce_cython[] = "__reduce_cython__";
 static const char __pyx_k_AssertionError[] = "AssertionError";
 static const char __pyx_k_X_hasher_input[] = "X_hasher_input";
+static const char __pyx_k_scaling_factor[] = "scaling_factor";
 static const char __pyx_k_View_MemoryView[] = "View.MemoryView";
 static const char __pyx_k_allocate_buffer[] = "allocate_buffer";
 static const char __pyx_k_collections_abc[] = "collections.abc";
 static const char __pyx_k_dtype_is_object[] = "dtype_is_object";
+static const char __pyx_k_n_features_mask[] = "n_features_mask";
 static const char __pyx_k_pyx_PickleError[] = "__pyx_PickleError";
 static const char __pyx_k_setstate_cython[] = "__setstate_cython__";
 static const char __pyx_k_pyx_unpickle_Enum[] = "__pyx_unpickle_Enum";
@@ -3451,7 +3452,7 @@ static void __pyx_memoryviewslice___pyx_pf_15View_dot_MemoryView_16_memoryviewsl
 static PyObject *__pyx_pf___pyx_memoryviewslice___reduce_cython__(CYTHON_UNUSED struct __pyx_memoryviewslice_obj *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf___pyx_memoryviewslice_2__setstate_cython__(CYTHON_UNUSED struct __pyx_memoryviewslice_obj *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
 static PyObject *__pyx_pf_15View_dot_MemoryView___pyx_unpickle_Enum(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v___pyx_type, long __pyx_v___pyx_checksum, PyObject *__pyx_v___pyx_state); /* proto */
-static PyObject *__pyx_pf_24multi_feature_hashing_cy_multi_feature_hashing_cy(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_X_hasher_input, int __pyx_v_n_features, PyArrayObject *__pyx_v_hashes, PyArrayObject *__pyx_v_signs, PyObject *__pyx_v_feature_names); /* proto */
+static PyObject *__pyx_pf_24multi_feature_hashing_cy_mfh_transform(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_X_hasher_input, int __pyx_v_n_features, PyArrayObject *__pyx_v_hashes, PyArrayObject *__pyx_v_signs, PyObject *__pyx_v_feature_names); /* proto */
 static PyObject *__pyx_tp_new_array(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_Enum(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_memoryview(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
@@ -3621,10 +3622,12 @@ typedef struct {
   PyObject *__pyx_n_s_k;
   PyObject *__pyx_n_s_main;
   PyObject *__pyx_n_s_memview;
+  PyObject *__pyx_n_s_mfh_transform;
   PyObject *__pyx_n_s_mode;
   PyObject *__pyx_n_s_multi_feature_hashing_cy;
   PyObject *__pyx_kp_s_multi_feature_hashing_cy_pyx;
   PyObject *__pyx_n_s_n_features;
+  PyObject *__pyx_n_s_n_features_mask;
   PyObject *__pyx_n_s_n_hashes;
   PyObject *__pyx_n_s_n_samples;
   PyObject *__pyx_n_s_name;
@@ -3652,6 +3655,7 @@ typedef struct {
   PyObject *__pyx_n_s_reduce_ex;
   PyObject *__pyx_n_s_register;
   PyObject *__pyx_n_s_row;
+  PyObject *__pyx_n_s_scaling_factor;
   PyObject *__pyx_n_s_setstate;
   PyObject *__pyx_n_s_setstate_cython;
   PyObject *__pyx_n_s_shape;
@@ -3659,6 +3663,7 @@ typedef struct {
   PyObject *__pyx_n_s_signs_view;
   PyObject *__pyx_n_s_size;
   PyObject *__pyx_n_s_spec;
+  PyObject *__pyx_n_s_sqrt;
   PyObject *__pyx_n_s_start;
   PyObject *__pyx_n_s_step;
   PyObject *__pyx_n_s_stop;
@@ -3861,10 +3866,12 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_k);
   Py_CLEAR(clear_module_state->__pyx_n_s_main);
   Py_CLEAR(clear_module_state->__pyx_n_s_memview);
+  Py_CLEAR(clear_module_state->__pyx_n_s_mfh_transform);
   Py_CLEAR(clear_module_state->__pyx_n_s_mode);
   Py_CLEAR(clear_module_state->__pyx_n_s_multi_feature_hashing_cy);
   Py_CLEAR(clear_module_state->__pyx_kp_s_multi_feature_hashing_cy_pyx);
   Py_CLEAR(clear_module_state->__pyx_n_s_n_features);
+  Py_CLEAR(clear_module_state->__pyx_n_s_n_features_mask);
   Py_CLEAR(clear_module_state->__pyx_n_s_n_hashes);
   Py_CLEAR(clear_module_state->__pyx_n_s_n_samples);
   Py_CLEAR(clear_module_state->__pyx_n_s_name);
@@ -3892,6 +3899,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_reduce_ex);
   Py_CLEAR(clear_module_state->__pyx_n_s_register);
   Py_CLEAR(clear_module_state->__pyx_n_s_row);
+  Py_CLEAR(clear_module_state->__pyx_n_s_scaling_factor);
   Py_CLEAR(clear_module_state->__pyx_n_s_setstate);
   Py_CLEAR(clear_module_state->__pyx_n_s_setstate_cython);
   Py_CLEAR(clear_module_state->__pyx_n_s_shape);
@@ -3899,6 +3907,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_signs_view);
   Py_CLEAR(clear_module_state->__pyx_n_s_size);
   Py_CLEAR(clear_module_state->__pyx_n_s_spec);
+  Py_CLEAR(clear_module_state->__pyx_n_s_sqrt);
   Py_CLEAR(clear_module_state->__pyx_n_s_start);
   Py_CLEAR(clear_module_state->__pyx_n_s_step);
   Py_CLEAR(clear_module_state->__pyx_n_s_stop);
@@ -4079,10 +4088,12 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_k);
   Py_VISIT(traverse_module_state->__pyx_n_s_main);
   Py_VISIT(traverse_module_state->__pyx_n_s_memview);
+  Py_VISIT(traverse_module_state->__pyx_n_s_mfh_transform);
   Py_VISIT(traverse_module_state->__pyx_n_s_mode);
   Py_VISIT(traverse_module_state->__pyx_n_s_multi_feature_hashing_cy);
   Py_VISIT(traverse_module_state->__pyx_kp_s_multi_feature_hashing_cy_pyx);
   Py_VISIT(traverse_module_state->__pyx_n_s_n_features);
+  Py_VISIT(traverse_module_state->__pyx_n_s_n_features_mask);
   Py_VISIT(traverse_module_state->__pyx_n_s_n_hashes);
   Py_VISIT(traverse_module_state->__pyx_n_s_n_samples);
   Py_VISIT(traverse_module_state->__pyx_n_s_name);
@@ -4110,6 +4121,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_reduce_ex);
   Py_VISIT(traverse_module_state->__pyx_n_s_register);
   Py_VISIT(traverse_module_state->__pyx_n_s_row);
+  Py_VISIT(traverse_module_state->__pyx_n_s_scaling_factor);
   Py_VISIT(traverse_module_state->__pyx_n_s_setstate);
   Py_VISIT(traverse_module_state->__pyx_n_s_setstate_cython);
   Py_VISIT(traverse_module_state->__pyx_n_s_shape);
@@ -4117,6 +4129,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_signs_view);
   Py_VISIT(traverse_module_state->__pyx_n_s_size);
   Py_VISIT(traverse_module_state->__pyx_n_s_spec);
+  Py_VISIT(traverse_module_state->__pyx_n_s_sqrt);
   Py_VISIT(traverse_module_state->__pyx_n_s_start);
   Py_VISIT(traverse_module_state->__pyx_n_s_step);
   Py_VISIT(traverse_module_state->__pyx_n_s_stop);
@@ -4325,10 +4338,12 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_k __pyx_mstate_global->__pyx_n_s_k
 #define __pyx_n_s_main __pyx_mstate_global->__pyx_n_s_main
 #define __pyx_n_s_memview __pyx_mstate_global->__pyx_n_s_memview
+#define __pyx_n_s_mfh_transform __pyx_mstate_global->__pyx_n_s_mfh_transform
 #define __pyx_n_s_mode __pyx_mstate_global->__pyx_n_s_mode
 #define __pyx_n_s_multi_feature_hashing_cy __pyx_mstate_global->__pyx_n_s_multi_feature_hashing_cy
 #define __pyx_kp_s_multi_feature_hashing_cy_pyx __pyx_mstate_global->__pyx_kp_s_multi_feature_hashing_cy_pyx
 #define __pyx_n_s_n_features __pyx_mstate_global->__pyx_n_s_n_features
+#define __pyx_n_s_n_features_mask __pyx_mstate_global->__pyx_n_s_n_features_mask
 #define __pyx_n_s_n_hashes __pyx_mstate_global->__pyx_n_s_n_hashes
 #define __pyx_n_s_n_samples __pyx_mstate_global->__pyx_n_s_n_samples
 #define __pyx_n_s_name __pyx_mstate_global->__pyx_n_s_name
@@ -4356,6 +4371,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_reduce_ex __pyx_mstate_global->__pyx_n_s_reduce_ex
 #define __pyx_n_s_register __pyx_mstate_global->__pyx_n_s_register
 #define __pyx_n_s_row __pyx_mstate_global->__pyx_n_s_row
+#define __pyx_n_s_scaling_factor __pyx_mstate_global->__pyx_n_s_scaling_factor
 #define __pyx_n_s_setstate __pyx_mstate_global->__pyx_n_s_setstate
 #define __pyx_n_s_setstate_cython __pyx_mstate_global->__pyx_n_s_setstate_cython
 #define __pyx_n_s_shape __pyx_mstate_global->__pyx_n_s_shape
@@ -4363,6 +4379,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_signs_view __pyx_mstate_global->__pyx_n_s_signs_view
 #define __pyx_n_s_size __pyx_mstate_global->__pyx_n_s_size
 #define __pyx_n_s_spec __pyx_mstate_global->__pyx_n_s_spec
+#define __pyx_n_s_sqrt __pyx_mstate_global->__pyx_n_s_sqrt
 #define __pyx_n_s_start __pyx_mstate_global->__pyx_n_s_start
 #define __pyx_n_s_step __pyx_mstate_global->__pyx_n_s_step
 #define __pyx_n_s_stop __pyx_mstate_global->__pyx_n_s_stop
@@ -19728,21 +19745,21 @@ static CYTHON_INLINE NPY_DATETIMEUNIT __pyx_f_5numpy_get_datetime64_unit(PyObjec
 /* "multi_feature_hashing_cy.pyx":7
  * ctypedef np.int64_t ITYPE_t
  * 
- * def multi_feature_hashing_cy(             # <<<<<<<<<<<<<<
+ * def mfh_transform(             # <<<<<<<<<<<<<<
  *     list X_hasher_input,
  *     int n_features,
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_24multi_feature_hashing_cy_1multi_feature_hashing_cy(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_24multi_feature_hashing_cy_1mfh_transform(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_24multi_feature_hashing_cy_1multi_feature_hashing_cy = {"multi_feature_hashing_cy", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_24multi_feature_hashing_cy_1multi_feature_hashing_cy, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_24multi_feature_hashing_cy_1multi_feature_hashing_cy(PyObject *__pyx_self, 
+static PyMethodDef __pyx_mdef_24multi_feature_hashing_cy_1mfh_transform = {"mfh_transform", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_24multi_feature_hashing_cy_1mfh_transform, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_24multi_feature_hashing_cy_1mfh_transform(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -19764,7 +19781,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   int __pyx_clineno = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("multi_feature_hashing_cy (wrapper)", 0);
+  __Pyx_RefNannySetupContext("mfh_transform (wrapper)", 0);
   #if !CYTHON_METH_FASTCALL
   #if CYTHON_ASSUME_SAFE_MACROS
   __pyx_nargs = PyTuple_GET_SIZE(__pyx_args);
@@ -19808,7 +19825,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
         }
         else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 7, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("multi_feature_hashing_cy", 1, 5, 5, 1); __PYX_ERR(0, 7, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("mfh_transform", 1, 5, 5, 1); __PYX_ERR(0, 7, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
@@ -19818,7 +19835,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
         }
         else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 7, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("multi_feature_hashing_cy", 1, 5, 5, 2); __PYX_ERR(0, 7, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("mfh_transform", 1, 5, 5, 2); __PYX_ERR(0, 7, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
@@ -19828,7 +19845,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
         }
         else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 7, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("multi_feature_hashing_cy", 1, 5, 5, 3); __PYX_ERR(0, 7, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("mfh_transform", 1, 5, 5, 3); __PYX_ERR(0, 7, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  4:
@@ -19838,12 +19855,12 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
         }
         else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 7, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("multi_feature_hashing_cy", 1, 5, 5, 4); __PYX_ERR(0, 7, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("mfh_transform", 1, 5, 5, 4); __PYX_ERR(0, 7, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "multi_feature_hashing_cy") < 0)) __PYX_ERR(0, 7, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "mfh_transform") < 0)) __PYX_ERR(0, 7, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 5)) {
       goto __pyx_L5_argtuple_error;
@@ -19862,7 +19879,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("multi_feature_hashing_cy", 1, 5, 5, __pyx_nargs); __PYX_ERR(0, 7, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("mfh_transform", 1, 5, 5, __pyx_nargs); __PYX_ERR(0, 7, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -19872,7 +19889,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
     }
   }
-  __Pyx_AddTraceback("multi_feature_hashing_cy.multi_feature_hashing_cy", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("multi_feature_hashing_cy.mfh_transform", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
@@ -19880,7 +19897,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_hashes), __pyx_ptype_5numpy_ndarray, 1, "hashes", 0))) __PYX_ERR(0, 10, __pyx_L1_error)
   if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_signs), __pyx_ptype_5numpy_ndarray, 1, "signs", 0))) __PYX_ERR(0, 11, __pyx_L1_error)
   if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_feature_names), (&PyList_Type), 1, "feature_names", 1))) __PYX_ERR(0, 12, __pyx_L1_error)
-  __pyx_r = __pyx_pf_24multi_feature_hashing_cy_multi_feature_hashing_cy(__pyx_self, __pyx_v_X_hasher_input, __pyx_v_n_features, __pyx_v_hashes, __pyx_v_signs, __pyx_v_feature_names);
+  __pyx_r = __pyx_pf_24multi_feature_hashing_cy_mfh_transform(__pyx_self, __pyx_v_X_hasher_input, __pyx_v_n_features, __pyx_v_hashes, __pyx_v_signs, __pyx_v_feature_names);
 
   /* function exit code */
   goto __pyx_L0;
@@ -19897,12 +19914,13 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_24multi_feature_hashing_cy_multi_feature_hashing_cy(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_X_hasher_input, int __pyx_v_n_features, PyArrayObject *__pyx_v_hashes, PyArrayObject *__pyx_v_signs, PyObject *__pyx_v_feature_names) {
+static PyObject *__pyx_pf_24multi_feature_hashing_cy_mfh_transform(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_X_hasher_input, int __pyx_v_n_features, PyArrayObject *__pyx_v_hashes, PyArrayObject *__pyx_v_signs, PyObject *__pyx_v_feature_names) {
   int __pyx_v_i;
   int __pyx_v_j;
   int __pyx_v_k;
   int __pyx_v_n_samples;
   int __pyx_v_n_hashes;
+  float __pyx_v_scaling_factor;
   PyArrayObject *__pyx_v_X_hashed = 0;
   __Pyx_memviewslice __pyx_v_X_hashed_view = { 0, 0, { 0 }, { 0 }, { 0 } };
   __Pyx_memviewslice __pyx_v_hashes_view = { 0, 0, { 0 }, { 0 }, { 0 } };
@@ -19914,6 +19932,7 @@ static PyObject *__pyx_pf_24multi_feature_hashing_cy_multi_feature_hashing_cy(CY
   __pyx_t_24multi_feature_hashing_cy_DTYPE_t __pyx_v_value;
   __pyx_t_24multi_feature_hashing_cy_ITYPE_t __pyx_v_hash_val;
   PyObject *__pyx_v_feature_map = 0;
+  int __pyx_v_n_features_mask;
   Py_ssize_t __pyx_7genexpr__pyx_v_idx;
   PyObject *__pyx_7genexpr__pyx_v_name = NULL;
   __Pyx_LocalBuf_ND __pyx_pybuffernd_X_hashed;
@@ -19929,28 +19948,30 @@ static PyObject *__pyx_pf_24multi_feature_hashing_cy_multi_feature_hashing_cy(CY
   PyObject *__pyx_t_3 = NULL;
   PyObject *__pyx_t_4 = NULL;
   PyObject *__pyx_t_5 = NULL;
-  PyObject *__pyx_t_6 = NULL;
-  PyArrayObject *__pyx_t_7 = NULL;
-  __Pyx_memviewslice __pyx_t_8 = { 0, 0, { 0 }, { 0 }, { 0 } };
-  __Pyx_memviewslice __pyx_t_9 = { 0, 0, { 0 }, { 0 }, { 0 } };
+  unsigned int __pyx_t_6;
+  float __pyx_t_7;
+  PyObject *__pyx_t_8 = NULL;
+  PyArrayObject *__pyx_t_9 = NULL;
   __Pyx_memviewslice __pyx_t_10 = { 0, 0, { 0 }, { 0 }, { 0 } };
-  Py_ssize_t __pyx_t_11;
-  int __pyx_t_12;
-  int __pyx_t_13;
+  __Pyx_memviewslice __pyx_t_11 = { 0, 0, { 0 }, { 0 }, { 0 } };
+  __Pyx_memviewslice __pyx_t_12 = { 0, 0, { 0 }, { 0 }, { 0 } };
+  Py_ssize_t __pyx_t_13;
   int __pyx_t_14;
   int __pyx_t_15;
   int __pyx_t_16;
-  Py_ssize_t __pyx_t_17;
-  __pyx_t_24multi_feature_hashing_cy_DTYPE_t __pyx_t_18;
-  int __pyx_t_19;
-  int __pyx_t_20;
-  Py_ssize_t __pyx_t_21;
+  int __pyx_t_17;
+  int __pyx_t_18;
+  Py_ssize_t __pyx_t_19;
+  __pyx_t_24multi_feature_hashing_cy_DTYPE_t __pyx_t_20;
+  int __pyx_t_21;
   int __pyx_t_22;
-  __pyx_t_24multi_feature_hashing_cy_ITYPE_t __pyx_t_23;
+  Py_ssize_t __pyx_t_23;
+  int __pyx_t_24;
+  __pyx_t_24multi_feature_hashing_cy_ITYPE_t __pyx_t_25;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
-  __Pyx_RefNannySetupContext("multi_feature_hashing_cy", 1);
+  __Pyx_RefNannySetupContext("mfh_transform", 1);
   __pyx_pybuffer_X_hashed.pybuffer.buf = NULL;
   __pyx_pybuffer_X_hashed.refcount = 0;
   __pyx_pybuffernd_X_hashed.data = NULL;
@@ -19979,7 +20000,7 @@ static PyObject *__pyx_pf_24multi_feature_hashing_cy_multi_feature_hashing_cy(CY
  *         int i, j, k
  *         int n_samples = len(X_hasher_input)             # <<<<<<<<<<<<<<
  *         int n_hashes = hashes.shape[0]
- *         np.ndarray[DTYPE_t, ndim=2] X_hashed = np.zeros((n_samples, n_features), dtype=np.float64)
+ *         float scaling_factor = (1 / np.sqrt(n_hashes))
  */
   if (unlikely(__pyx_v_X_hasher_input == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
@@ -19992,139 +20013,183 @@ static PyObject *__pyx_pf_24multi_feature_hashing_cy_multi_feature_hashing_cy(CY
  *         int i, j, k
  *         int n_samples = len(X_hasher_input)
  *         int n_hashes = hashes.shape[0]             # <<<<<<<<<<<<<<
+ *         float scaling_factor = (1 / np.sqrt(n_hashes))
  *         np.ndarray[DTYPE_t, ndim=2] X_hashed = np.zeros((n_samples, n_features), dtype=np.float64)
- *         DTYPE_t[:, :] X_hashed_view = X_hashed
  */
   __pyx_v_n_hashes = (__pyx_f_5numpy_7ndarray_5shape_shape(((PyArrayObject *)__pyx_v_hashes))[0]);
 
   /* "multi_feature_hashing_cy.pyx":18
  *         int n_samples = len(X_hasher_input)
  *         int n_hashes = hashes.shape[0]
+ *         float scaling_factor = (1 / np.sqrt(n_hashes))             # <<<<<<<<<<<<<<
+ *         np.ndarray[DTYPE_t, ndim=2] X_hashed = np.zeros((n_samples, n_features), dtype=np.float64)
+ *         DTYPE_t[:, :] X_hashed_view = X_hashed
+ */
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 18, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_sqrt); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 18, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_n_hashes); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 18, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_5 = NULL;
+  __pyx_t_6 = 0;
+  #if CYTHON_UNPACK_METHODS
+  if (unlikely(PyMethod_Check(__pyx_t_4))) {
+    __pyx_t_5 = PyMethod_GET_SELF(__pyx_t_4);
+    if (likely(__pyx_t_5)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
+      __Pyx_INCREF(__pyx_t_5);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_4, function);
+      __pyx_t_6 = 1;
+    }
+  }
+  #endif
+  {
+    PyObject *__pyx_callargs[2] = {__pyx_t_5, __pyx_t_3};
+    __pyx_t_2 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_6, 1+__pyx_t_6);
+    __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 18, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  }
+  __pyx_t_4 = __Pyx_PyNumber_Divide(__pyx_int_1, __pyx_t_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 18, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_7 = __pyx_PyFloat_AsFloat(__pyx_t_4); if (unlikely((__pyx_t_7 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 18, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __pyx_v_scaling_factor = __pyx_t_7;
+
+  /* "multi_feature_hashing_cy.pyx":19
+ *         int n_hashes = hashes.shape[0]
+ *         float scaling_factor = (1 / np.sqrt(n_hashes))
  *         np.ndarray[DTYPE_t, ndim=2] X_hashed = np.zeros((n_samples, n_features), dtype=np.float64)             # <<<<<<<<<<<<<<
  *         DTYPE_t[:, :] X_hashed_view = X_hashed
  *         ITYPE_t[:, :] hashes_view = hashes
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 18, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_zeros); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 18, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_n_samples); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 18, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_n_features); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 18, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 19, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 18, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_5);
-  __Pyx_GIVEREF(__pyx_t_2);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_2)) __PYX_ERR(0, 18, __pyx_L1_error);
-  __Pyx_GIVEREF(__pyx_t_4);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 1, __pyx_t_4)) __PYX_ERR(0, 18, __pyx_L1_error);
-  __pyx_t_2 = 0;
-  __pyx_t_4 = 0;
-  __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 18, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
-  __Pyx_GIVEREF(__pyx_t_5);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_5)) __PYX_ERR(0, 18, __pyx_L1_error);
-  __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 18, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_5);
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 18, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_zeros); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 19, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_float64); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 18, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_6);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_dtype, __pyx_t_6) < 0) __PYX_ERR(0, 18, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_4, __pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 18, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_6);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_n_samples); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 19, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_n_features); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 19, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 19, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __Pyx_GIVEREF(__pyx_t_4);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_4)) __PYX_ERR(0, 19, __pyx_L1_error);
+  __Pyx_GIVEREF(__pyx_t_3);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 1, __pyx_t_3)) __PYX_ERR(0, 19, __pyx_L1_error);
+  __pyx_t_4 = 0;
+  __pyx_t_3 = 0;
+  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 19, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_GIVEREF(__pyx_t_5);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_5)) __PYX_ERR(0, 19, __pyx_L1_error);
+  __pyx_t_5 = 0;
+  __pyx_t_5 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 19, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 19, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_float64); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 19, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_8);
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_dtype, __pyx_t_8) < 0) __PYX_ERR(0, 19, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+  __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_3, __pyx_t_5); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 19, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_8);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (!(likely(((__pyx_t_6) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_6, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 18, __pyx_L1_error)
-  __pyx_t_7 = ((PyArrayObject *)__pyx_t_6);
+  if (!(likely(((__pyx_t_8) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_8, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 19, __pyx_L1_error)
+  __pyx_t_9 = ((PyArrayObject *)__pyx_t_8);
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
-    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_X_hashed.rcbuffer->pybuffer, (PyObject*)__pyx_t_7, &__Pyx_TypeInfo_nn___pyx_t_24multi_feature_hashing_cy_DTYPE_t, PyBUF_FORMAT| PyBUF_STRIDES, 2, 0, __pyx_stack) == -1)) {
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_X_hashed.rcbuffer->pybuffer, (PyObject*)__pyx_t_9, &__Pyx_TypeInfo_nn___pyx_t_24multi_feature_hashing_cy_DTYPE_t, PyBUF_FORMAT| PyBUF_STRIDES, 2, 0, __pyx_stack) == -1)) {
       __pyx_v_X_hashed = ((PyArrayObject *)Py_None); __Pyx_INCREF(Py_None); __pyx_pybuffernd_X_hashed.rcbuffer->pybuffer.buf = NULL;
-      __PYX_ERR(0, 18, __pyx_L1_error)
+      __PYX_ERR(0, 19, __pyx_L1_error)
     } else {__pyx_pybuffernd_X_hashed.diminfo[0].strides = __pyx_pybuffernd_X_hashed.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_X_hashed.diminfo[0].shape = __pyx_pybuffernd_X_hashed.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_X_hashed.diminfo[1].strides = __pyx_pybuffernd_X_hashed.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_X_hashed.diminfo[1].shape = __pyx_pybuffernd_X_hashed.rcbuffer->pybuffer.shape[1];
     }
   }
-  __pyx_t_7 = 0;
-  __pyx_v_X_hashed = ((PyArrayObject *)__pyx_t_6);
-  __pyx_t_6 = 0;
+  __pyx_t_9 = 0;
+  __pyx_v_X_hashed = ((PyArrayObject *)__pyx_t_8);
+  __pyx_t_8 = 0;
 
-  /* "multi_feature_hashing_cy.pyx":19
- *         int n_hashes = hashes.shape[0]
+  /* "multi_feature_hashing_cy.pyx":20
+ *         float scaling_factor = (1 / np.sqrt(n_hashes))
  *         np.ndarray[DTYPE_t, ndim=2] X_hashed = np.zeros((n_samples, n_features), dtype=np.float64)
  *         DTYPE_t[:, :] X_hashed_view = X_hashed             # <<<<<<<<<<<<<<
  *         ITYPE_t[:, :] hashes_view = hashes
  *         ITYPE_t[:] signs_view = signs
  */
-  __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_dsds_nn___pyx_t_24multi_feature_hashing_cy_DTYPE_t(((PyObject *)__pyx_v_X_hashed), PyBUF_WRITABLE); if (unlikely(!__pyx_t_8.memview)) __PYX_ERR(0, 19, __pyx_L1_error)
-  __pyx_v_X_hashed_view = __pyx_t_8;
-  __pyx_t_8.memview = NULL;
-  __pyx_t_8.data = NULL;
+  __pyx_t_10 = __Pyx_PyObject_to_MemoryviewSlice_dsds_nn___pyx_t_24multi_feature_hashing_cy_DTYPE_t(((PyObject *)__pyx_v_X_hashed), PyBUF_WRITABLE); if (unlikely(!__pyx_t_10.memview)) __PYX_ERR(0, 20, __pyx_L1_error)
+  __pyx_v_X_hashed_view = __pyx_t_10;
+  __pyx_t_10.memview = NULL;
+  __pyx_t_10.data = NULL;
 
-  /* "multi_feature_hashing_cy.pyx":20
+  /* "multi_feature_hashing_cy.pyx":21
  *         np.ndarray[DTYPE_t, ndim=2] X_hashed = np.zeros((n_samples, n_features), dtype=np.float64)
  *         DTYPE_t[:, :] X_hashed_view = X_hashed
  *         ITYPE_t[:, :] hashes_view = hashes             # <<<<<<<<<<<<<<
  *         ITYPE_t[:] signs_view = signs
  * 
  */
-  __pyx_t_9 = __Pyx_PyObject_to_MemoryviewSlice_dsds_nn___pyx_t_24multi_feature_hashing_cy_ITYPE_t(((PyObject *)__pyx_v_hashes), PyBUF_WRITABLE); if (unlikely(!__pyx_t_9.memview)) __PYX_ERR(0, 20, __pyx_L1_error)
-  __pyx_v_hashes_view = __pyx_t_9;
-  __pyx_t_9.memview = NULL;
-  __pyx_t_9.data = NULL;
+  __pyx_t_11 = __Pyx_PyObject_to_MemoryviewSlice_dsds_nn___pyx_t_24multi_feature_hashing_cy_ITYPE_t(((PyObject *)__pyx_v_hashes), PyBUF_WRITABLE); if (unlikely(!__pyx_t_11.memview)) __PYX_ERR(0, 21, __pyx_L1_error)
+  __pyx_v_hashes_view = __pyx_t_11;
+  __pyx_t_11.memview = NULL;
+  __pyx_t_11.data = NULL;
 
-  /* "multi_feature_hashing_cy.pyx":21
+  /* "multi_feature_hashing_cy.pyx":22
  *         DTYPE_t[:, :] X_hashed_view = X_hashed
  *         ITYPE_t[:, :] hashes_view = hashes
  *         ITYPE_t[:] signs_view = signs             # <<<<<<<<<<<<<<
  * 
  *         list row
  */
-  __pyx_t_10 = __Pyx_PyObject_to_MemoryviewSlice_ds_nn___pyx_t_24multi_feature_hashing_cy_ITYPE_t(((PyObject *)__pyx_v_signs), PyBUF_WRITABLE); if (unlikely(!__pyx_t_10.memview)) __PYX_ERR(0, 21, __pyx_L1_error)
-  __pyx_v_signs_view = __pyx_t_10;
-  __pyx_t_10.memview = NULL;
-  __pyx_t_10.data = NULL;
+  __pyx_t_12 = __Pyx_PyObject_to_MemoryviewSlice_ds_nn___pyx_t_24multi_feature_hashing_cy_ITYPE_t(((PyObject *)__pyx_v_signs), PyBUF_WRITABLE); if (unlikely(!__pyx_t_12.memview)) __PYX_ERR(0, 22, __pyx_L1_error)
+  __pyx_v_signs_view = __pyx_t_12;
+  __pyx_t_12.memview = NULL;
+  __pyx_t_12.data = NULL;
 
-  /* "multi_feature_hashing_cy.pyx":30
+  /* "multi_feature_hashing_cy.pyx":31
  *         ITYPE_t hash_val
  * 
  *         dict feature_map = {name: idx for idx, name in enumerate(feature_names)}             # <<<<<<<<<<<<<<
  * 
- *     for i in range(n_samples):
+ *     cdef int n_features_mask = n_features - 1
  */
   { /* enter inner scope */
-    __pyx_t_6 = PyDict_New(); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 30, __pyx_L5_error)
-    __Pyx_GOTREF(__pyx_t_6);
+    __pyx_t_8 = PyDict_New(); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 31, __pyx_L5_error)
+    __Pyx_GOTREF(__pyx_t_8);
     __pyx_t_1 = 0;
     __pyx_t_5 = __pyx_v_feature_names; __Pyx_INCREF(__pyx_t_5);
-    __pyx_t_11 = 0;
+    __pyx_t_13 = 0;
     for (;;) {
       {
         Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_5);
         #if !CYTHON_ASSUME_SAFE_MACROS
-        if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 30, __pyx_L5_error)
+        if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 31, __pyx_L5_error)
         #endif
-        if (__pyx_t_11 >= __pyx_temp) break;
+        if (__pyx_t_13 >= __pyx_temp) break;
       }
       #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-      __pyx_t_4 = PyList_GET_ITEM(__pyx_t_5, __pyx_t_11); __Pyx_INCREF(__pyx_t_4); __pyx_t_11++; if (unlikely((0 < 0))) __PYX_ERR(0, 30, __pyx_L5_error)
+      __pyx_t_3 = PyList_GET_ITEM(__pyx_t_5, __pyx_t_13); __Pyx_INCREF(__pyx_t_3); __pyx_t_13++; if (unlikely((0 < 0))) __PYX_ERR(0, 31, __pyx_L5_error)
       #else
-      __pyx_t_4 = __Pyx_PySequence_ITEM(__pyx_t_5, __pyx_t_11); __pyx_t_11++; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 30, __pyx_L5_error)
-      __Pyx_GOTREF(__pyx_t_4);
+      __pyx_t_3 = __Pyx_PySequence_ITEM(__pyx_t_5, __pyx_t_13); __pyx_t_13++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 31, __pyx_L5_error)
+      __Pyx_GOTREF(__pyx_t_3);
       #endif
-      __Pyx_XDECREF_SET(__pyx_7genexpr__pyx_v_name, __pyx_t_4);
-      __pyx_t_4 = 0;
+      __Pyx_XDECREF_SET(__pyx_7genexpr__pyx_v_name, __pyx_t_3);
+      __pyx_t_3 = 0;
       __pyx_7genexpr__pyx_v_idx = __pyx_t_1;
       __pyx_t_1 = (__pyx_t_1 + 1);
-      __pyx_t_4 = PyInt_FromSsize_t(__pyx_7genexpr__pyx_v_idx); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 30, __pyx_L5_error)
-      __Pyx_GOTREF(__pyx_t_4);
-      if (unlikely(PyDict_SetItem(__pyx_t_6, (PyObject*)__pyx_7genexpr__pyx_v_name, (PyObject*)__pyx_t_4))) __PYX_ERR(0, 30, __pyx_L5_error)
-      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+      __pyx_t_3 = PyInt_FromSsize_t(__pyx_7genexpr__pyx_v_idx); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 31, __pyx_L5_error)
+      __Pyx_GOTREF(__pyx_t_3);
+      if (unlikely(PyDict_SetItem(__pyx_t_8, (PyObject*)__pyx_7genexpr__pyx_v_name, (PyObject*)__pyx_t_3))) __PYX_ERR(0, 31, __pyx_L5_error)
+      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     }
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_XDECREF(__pyx_7genexpr__pyx_v_name); __pyx_7genexpr__pyx_v_name = 0;
@@ -20134,22 +20199,31 @@ static PyObject *__pyx_pf_24multi_feature_hashing_cy_multi_feature_hashing_cy(CY
     goto __pyx_L1_error;
     __pyx_L9_exit_scope:;
   } /* exit inner scope */
-  __pyx_v_feature_map = ((PyObject*)__pyx_t_6);
-  __pyx_t_6 = 0;
+  __pyx_v_feature_map = ((PyObject*)__pyx_t_8);
+  __pyx_t_8 = 0;
 
-  /* "multi_feature_hashing_cy.pyx":32
+  /* "multi_feature_hashing_cy.pyx":33
  *         dict feature_map = {name: idx for idx, name in enumerate(feature_names)}
+ * 
+ *     cdef int n_features_mask = n_features - 1             # <<<<<<<<<<<<<<
+ * 
+ *     for i in range(n_samples):
+ */
+  __pyx_v_n_features_mask = (__pyx_v_n_features - 1);
+
+  /* "multi_feature_hashing_cy.pyx":35
+ *     cdef int n_features_mask = n_features - 1
  * 
  *     for i in range(n_samples):             # <<<<<<<<<<<<<<
  *         row = X_hasher_input[i]
  * 
  */
-  __pyx_t_12 = __pyx_v_n_samples;
-  __pyx_t_13 = __pyx_t_12;
-  for (__pyx_t_14 = 0; __pyx_t_14 < __pyx_t_13; __pyx_t_14+=1) {
-    __pyx_v_i = __pyx_t_14;
+  __pyx_t_14 = __pyx_v_n_samples;
+  __pyx_t_15 = __pyx_t_14;
+  for (__pyx_t_16 = 0; __pyx_t_16 < __pyx_t_15; __pyx_t_16+=1) {
+    __pyx_v_i = __pyx_t_16;
 
-    /* "multi_feature_hashing_cy.pyx":33
+    /* "multi_feature_hashing_cy.pyx":36
  * 
  *     for i in range(n_samples):
  *         row = X_hasher_input[i]             # <<<<<<<<<<<<<<
@@ -20158,15 +20232,15 @@ static PyObject *__pyx_pf_24multi_feature_hashing_cy_multi_feature_hashing_cy(CY
  */
     if (unlikely(__pyx_v_X_hasher_input == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      __PYX_ERR(0, 33, __pyx_L1_error)
+      __PYX_ERR(0, 36, __pyx_L1_error)
     }
-    __pyx_t_6 = __Pyx_GetItemInt_List(__pyx_v_X_hasher_input, __pyx_v_i, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 33, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_6);
-    if (!(likely(PyList_CheckExact(__pyx_t_6))||((__pyx_t_6) == Py_None) || __Pyx_RaiseUnexpectedTypeError("list", __pyx_t_6))) __PYX_ERR(0, 33, __pyx_L1_error)
-    __Pyx_XDECREF_SET(__pyx_v_row, ((PyObject*)__pyx_t_6));
-    __pyx_t_6 = 0;
+    __pyx_t_8 = __Pyx_GetItemInt_List(__pyx_v_X_hasher_input, __pyx_v_i, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 36, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_8);
+    if (!(likely(PyList_CheckExact(__pyx_t_8))||((__pyx_t_8) == Py_None) || __Pyx_RaiseUnexpectedTypeError("list", __pyx_t_8))) __PYX_ERR(0, 36, __pyx_L1_error)
+    __Pyx_XDECREF_SET(__pyx_v_row, ((PyObject*)__pyx_t_8));
+    __pyx_t_8 = 0;
 
-    /* "multi_feature_hashing_cy.pyx":35
+    /* "multi_feature_hashing_cy.pyx":38
  *         row = X_hasher_input[i]
  * 
  *         for j in range(len(row)):             # <<<<<<<<<<<<<<
@@ -20175,14 +20249,14 @@ static PyObject *__pyx_pf_24multi_feature_hashing_cy_multi_feature_hashing_cy(CY
  */
     if (unlikely(__pyx_v_row == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
-      __PYX_ERR(0, 35, __pyx_L1_error)
+      __PYX_ERR(0, 38, __pyx_L1_error)
     }
-    __pyx_t_1 = __Pyx_PyList_GET_SIZE(__pyx_v_row); if (unlikely(__pyx_t_1 == ((Py_ssize_t)-1))) __PYX_ERR(0, 35, __pyx_L1_error)
-    __pyx_t_11 = __pyx_t_1;
-    for (__pyx_t_15 = 0; __pyx_t_15 < __pyx_t_11; __pyx_t_15+=1) {
-      __pyx_v_j = __pyx_t_15;
+    __pyx_t_1 = __Pyx_PyList_GET_SIZE(__pyx_v_row); if (unlikely(__pyx_t_1 == ((Py_ssize_t)-1))) __PYX_ERR(0, 38, __pyx_L1_error)
+    __pyx_t_13 = __pyx_t_1;
+    for (__pyx_t_17 = 0; __pyx_t_17 < __pyx_t_13; __pyx_t_17+=1) {
+      __pyx_v_j = __pyx_t_17;
 
-      /* "multi_feature_hashing_cy.pyx":36
+      /* "multi_feature_hashing_cy.pyx":39
  * 
  *         for j in range(len(row)):
  *             feature_value = row[j]             # <<<<<<<<<<<<<<
@@ -20191,15 +20265,15 @@ static PyObject *__pyx_pf_24multi_feature_hashing_cy_multi_feature_hashing_cy(CY
  */
       if (unlikely(__pyx_v_row == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        __PYX_ERR(0, 36, __pyx_L1_error)
+        __PYX_ERR(0, 39, __pyx_L1_error)
       }
-      __pyx_t_6 = __Pyx_GetItemInt_List(__pyx_v_row, __pyx_v_j, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 36, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_6);
-      if (!(likely(PyTuple_CheckExact(__pyx_t_6))||((__pyx_t_6) == Py_None) || __Pyx_RaiseUnexpectedTypeError("tuple", __pyx_t_6))) __PYX_ERR(0, 36, __pyx_L1_error)
-      __Pyx_XDECREF_SET(__pyx_v_feature_value, ((PyObject*)__pyx_t_6));
-      __pyx_t_6 = 0;
+      __pyx_t_8 = __Pyx_GetItemInt_List(__pyx_v_row, __pyx_v_j, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 39, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_8);
+      if (!(likely(PyTuple_CheckExact(__pyx_t_8))||((__pyx_t_8) == Py_None) || __Pyx_RaiseUnexpectedTypeError("tuple", __pyx_t_8))) __PYX_ERR(0, 39, __pyx_L1_error)
+      __Pyx_XDECREF_SET(__pyx_v_feature_value, ((PyObject*)__pyx_t_8));
+      __pyx_t_8 = 0;
 
-      /* "multi_feature_hashing_cy.pyx":37
+      /* "multi_feature_hashing_cy.pyx":40
  *         for j in range(len(row)):
  *             feature_value = row[j]
  *             feature = feature_value[0]             # <<<<<<<<<<<<<<
@@ -20208,128 +20282,129 @@ static PyObject *__pyx_pf_24multi_feature_hashing_cy_multi_feature_hashing_cy(CY
  */
       if (unlikely(__pyx_v_feature_value == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        __PYX_ERR(0, 37, __pyx_L1_error)
+        __PYX_ERR(0, 40, __pyx_L1_error)
       }
-      __pyx_t_6 = __Pyx_GetItemInt_Tuple(__pyx_v_feature_value, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 37, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_6);
-      __Pyx_XDECREF_SET(__pyx_v_feature, __pyx_t_6);
-      __pyx_t_6 = 0;
+      __pyx_t_8 = __Pyx_GetItemInt_Tuple(__pyx_v_feature_value, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 40, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_8);
+      __Pyx_XDECREF_SET(__pyx_v_feature, __pyx_t_8);
+      __pyx_t_8 = 0;
 
-      /* "multi_feature_hashing_cy.pyx":38
+      /* "multi_feature_hashing_cy.pyx":41
  *             feature_value = row[j]
  *             feature = feature_value[0]
  *             feat_idx = feature_map[feature]             # <<<<<<<<<<<<<<
  * 
- *             value = feature_value[1] * signs_view[feat_idx]
+ *             value = feature_value[1] * signs_view[feat_idx] * scaling_factor
  */
-      __pyx_t_6 = __Pyx_PyDict_GetItem(__pyx_v_feature_map, __pyx_v_feature); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 38, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_16 = __Pyx_PyInt_As_int(__pyx_t_6); if (unlikely((__pyx_t_16 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 38, __pyx_L1_error)
-      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      __pyx_v_feat_idx = __pyx_t_16;
+      __pyx_t_8 = __Pyx_PyDict_GetItem(__pyx_v_feature_map, __pyx_v_feature); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 41, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_8);
+      __pyx_t_18 = __Pyx_PyInt_As_int(__pyx_t_8); if (unlikely((__pyx_t_18 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 41, __pyx_L1_error)
+      __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+      __pyx_v_feat_idx = __pyx_t_18;
 
-      /* "multi_feature_hashing_cy.pyx":40
+      /* "multi_feature_hashing_cy.pyx":43
  *             feat_idx = feature_map[feature]
  * 
- *             value = feature_value[1] * signs_view[feat_idx]             # <<<<<<<<<<<<<<
+ *             value = feature_value[1] * signs_view[feat_idx] * scaling_factor             # <<<<<<<<<<<<<<
  * 
  *             for k in range(n_hashes):
  */
       if (unlikely(__pyx_v_feature_value == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        __PYX_ERR(0, 40, __pyx_L1_error)
+        __PYX_ERR(0, 43, __pyx_L1_error)
       }
-      __pyx_t_6 = __Pyx_GetItemInt_Tuple(__pyx_v_feature_value, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 40, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_17 = __pyx_v_feat_idx;
-      __pyx_t_16 = -1;
-      if (__pyx_t_17 < 0) {
-        __pyx_t_17 += __pyx_v_signs_view.shape[0];
-        if (unlikely(__pyx_t_17 < 0)) __pyx_t_16 = 0;
-      } else if (unlikely(__pyx_t_17 >= __pyx_v_signs_view.shape[0])) __pyx_t_16 = 0;
-      if (unlikely(__pyx_t_16 != -1)) {
-        __Pyx_RaiseBufferIndexError(__pyx_t_16);
-        __PYX_ERR(0, 40, __pyx_L1_error)
+      __pyx_t_8 = __Pyx_GetItemInt_Tuple(__pyx_v_feature_value, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 43, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_8);
+      __pyx_t_19 = __pyx_v_feat_idx;
+      __pyx_t_18 = -1;
+      if (__pyx_t_19 < 0) {
+        __pyx_t_19 += __pyx_v_signs_view.shape[0];
+        if (unlikely(__pyx_t_19 < 0)) __pyx_t_18 = 0;
+      } else if (unlikely(__pyx_t_19 >= __pyx_v_signs_view.shape[0])) __pyx_t_18 = 0;
+      if (unlikely(__pyx_t_18 != -1)) {
+        __Pyx_RaiseBufferIndexError(__pyx_t_18);
+        __PYX_ERR(0, 43, __pyx_L1_error)
       }
-      __pyx_t_5 = __Pyx_PyInt_From_npy_int64((*((__pyx_t_24multi_feature_hashing_cy_ITYPE_t *) ( /* dim=0 */ (__pyx_v_signs_view.data + __pyx_t_17 * __pyx_v_signs_view.strides[0]) )))); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 40, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyInt_From_npy_int64((*((__pyx_t_24multi_feature_hashing_cy_ITYPE_t *) ( /* dim=0 */ (__pyx_v_signs_view.data + __pyx_t_19 * __pyx_v_signs_view.strides[0]) )))); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 43, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
-      __pyx_t_4 = PyNumber_Multiply(__pyx_t_6, __pyx_t_5); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 40, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_4);
-      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+      __pyx_t_3 = PyNumber_Multiply(__pyx_t_8, __pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 43, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_3);
+      __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-      __pyx_t_18 = __pyx_PyFloat_AsDouble(__pyx_t_4); if (unlikely((__pyx_t_18 == ((npy_float64)-1)) && PyErr_Occurred())) __PYX_ERR(0, 40, __pyx_L1_error)
-      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-      __pyx_v_value = __pyx_t_18;
+      __pyx_t_5 = PyFloat_FromDouble(__pyx_v_scaling_factor); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 43, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_5);
+      __pyx_t_8 = PyNumber_Multiply(__pyx_t_3, __pyx_t_5); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 43, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_8);
+      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+      __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+      __pyx_t_20 = __pyx_PyFloat_AsDouble(__pyx_t_8); if (unlikely((__pyx_t_20 == ((npy_float64)-1)) && PyErr_Occurred())) __PYX_ERR(0, 43, __pyx_L1_error)
+      __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+      __pyx_v_value = __pyx_t_20;
 
-      /* "multi_feature_hashing_cy.pyx":42
- *             value = feature_value[1] * signs_view[feat_idx]
+      /* "multi_feature_hashing_cy.pyx":45
+ *             value = feature_value[1] * signs_view[feat_idx] * scaling_factor
  * 
  *             for k in range(n_hashes):             # <<<<<<<<<<<<<<
- *                 hash_val = hashes_view[k, feat_idx] % n_features
+ *                 hash_val = hashes_view[k, feat_idx] & n_features_mask
  *                 X_hashed_view[i, hash_val] += value
  */
-      __pyx_t_16 = __pyx_v_n_hashes;
-      __pyx_t_19 = __pyx_t_16;
-      for (__pyx_t_20 = 0; __pyx_t_20 < __pyx_t_19; __pyx_t_20+=1) {
-        __pyx_v_k = __pyx_t_20;
+      __pyx_t_18 = __pyx_v_n_hashes;
+      __pyx_t_21 = __pyx_t_18;
+      for (__pyx_t_22 = 0; __pyx_t_22 < __pyx_t_21; __pyx_t_22+=1) {
+        __pyx_v_k = __pyx_t_22;
 
-        /* "multi_feature_hashing_cy.pyx":43
+        /* "multi_feature_hashing_cy.pyx":46
  * 
  *             for k in range(n_hashes):
- *                 hash_val = hashes_view[k, feat_idx] % n_features             # <<<<<<<<<<<<<<
+ *                 hash_val = hashes_view[k, feat_idx] & n_features_mask             # <<<<<<<<<<<<<<
  *                 X_hashed_view[i, hash_val] += value
  * 
  */
-        __pyx_t_17 = __pyx_v_k;
-        __pyx_t_21 = __pyx_v_feat_idx;
-        __pyx_t_22 = -1;
-        if (__pyx_t_17 < 0) {
-          __pyx_t_17 += __pyx_v_hashes_view.shape[0];
-          if (unlikely(__pyx_t_17 < 0)) __pyx_t_22 = 0;
-        } else if (unlikely(__pyx_t_17 >= __pyx_v_hashes_view.shape[0])) __pyx_t_22 = 0;
-        if (__pyx_t_21 < 0) {
-          __pyx_t_21 += __pyx_v_hashes_view.shape[1];
-          if (unlikely(__pyx_t_21 < 0)) __pyx_t_22 = 1;
-        } else if (unlikely(__pyx_t_21 >= __pyx_v_hashes_view.shape[1])) __pyx_t_22 = 1;
-        if (unlikely(__pyx_t_22 != -1)) {
-          __Pyx_RaiseBufferIndexError(__pyx_t_22);
-          __PYX_ERR(0, 43, __pyx_L1_error)
+        __pyx_t_19 = __pyx_v_k;
+        __pyx_t_23 = __pyx_v_feat_idx;
+        __pyx_t_24 = -1;
+        if (__pyx_t_19 < 0) {
+          __pyx_t_19 += __pyx_v_hashes_view.shape[0];
+          if (unlikely(__pyx_t_19 < 0)) __pyx_t_24 = 0;
+        } else if (unlikely(__pyx_t_19 >= __pyx_v_hashes_view.shape[0])) __pyx_t_24 = 0;
+        if (__pyx_t_23 < 0) {
+          __pyx_t_23 += __pyx_v_hashes_view.shape[1];
+          if (unlikely(__pyx_t_23 < 0)) __pyx_t_24 = 1;
+        } else if (unlikely(__pyx_t_23 >= __pyx_v_hashes_view.shape[1])) __pyx_t_24 = 1;
+        if (unlikely(__pyx_t_24 != -1)) {
+          __Pyx_RaiseBufferIndexError(__pyx_t_24);
+          __PYX_ERR(0, 46, __pyx_L1_error)
         }
-        __pyx_t_23 = (*((__pyx_t_24multi_feature_hashing_cy_ITYPE_t *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_hashes_view.data + __pyx_t_17 * __pyx_v_hashes_view.strides[0]) ) + __pyx_t_21 * __pyx_v_hashes_view.strides[1]) )));
-        if (unlikely(__pyx_v_n_features == 0)) {
-          PyErr_SetString(PyExc_ZeroDivisionError, "integer division or modulo by zero");
-          __PYX_ERR(0, 43, __pyx_L1_error)
-        }
-        __pyx_v_hash_val = __Pyx_mod___pyx_t_24multi_feature_hashing_cy_ITYPE_t(__pyx_t_23, __pyx_v_n_features);
+        __pyx_v_hash_val = ((*((__pyx_t_24multi_feature_hashing_cy_ITYPE_t *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_hashes_view.data + __pyx_t_19 * __pyx_v_hashes_view.strides[0]) ) + __pyx_t_23 * __pyx_v_hashes_view.strides[1]) ))) & __pyx_v_n_features_mask);
 
-        /* "multi_feature_hashing_cy.pyx":44
+        /* "multi_feature_hashing_cy.pyx":47
  *             for k in range(n_hashes):
- *                 hash_val = hashes_view[k, feat_idx] % n_features
+ *                 hash_val = hashes_view[k, feat_idx] & n_features_mask
  *                 X_hashed_view[i, hash_val] += value             # <<<<<<<<<<<<<<
  * 
  *     return X_hashed
  */
-        __pyx_t_21 = __pyx_v_i;
-        __pyx_t_23 = __pyx_v_hash_val;
-        __pyx_t_22 = -1;
-        if (__pyx_t_21 < 0) {
-          __pyx_t_21 += __pyx_v_X_hashed_view.shape[0];
-          if (unlikely(__pyx_t_21 < 0)) __pyx_t_22 = 0;
-        } else if (unlikely(__pyx_t_21 >= __pyx_v_X_hashed_view.shape[0])) __pyx_t_22 = 0;
+        __pyx_t_23 = __pyx_v_i;
+        __pyx_t_25 = __pyx_v_hash_val;
+        __pyx_t_24 = -1;
         if (__pyx_t_23 < 0) {
-          __pyx_t_23 += __pyx_v_X_hashed_view.shape[1];
-          if (unlikely(__pyx_t_23 < 0)) __pyx_t_22 = 1;
-        } else if (unlikely(__pyx_t_23 >= __pyx_v_X_hashed_view.shape[1])) __pyx_t_22 = 1;
-        if (unlikely(__pyx_t_22 != -1)) {
-          __Pyx_RaiseBufferIndexError(__pyx_t_22);
-          __PYX_ERR(0, 44, __pyx_L1_error)
+          __pyx_t_23 += __pyx_v_X_hashed_view.shape[0];
+          if (unlikely(__pyx_t_23 < 0)) __pyx_t_24 = 0;
+        } else if (unlikely(__pyx_t_23 >= __pyx_v_X_hashed_view.shape[0])) __pyx_t_24 = 0;
+        if (__pyx_t_25 < 0) {
+          __pyx_t_25 += __pyx_v_X_hashed_view.shape[1];
+          if (unlikely(__pyx_t_25 < 0)) __pyx_t_24 = 1;
+        } else if (unlikely(__pyx_t_25 >= __pyx_v_X_hashed_view.shape[1])) __pyx_t_24 = 1;
+        if (unlikely(__pyx_t_24 != -1)) {
+          __Pyx_RaiseBufferIndexError(__pyx_t_24);
+          __PYX_ERR(0, 47, __pyx_L1_error)
         }
-        *((__pyx_t_24multi_feature_hashing_cy_DTYPE_t *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_X_hashed_view.data + __pyx_t_21 * __pyx_v_X_hashed_view.strides[0]) ) + __pyx_t_23 * __pyx_v_X_hashed_view.strides[1]) )) += __pyx_v_value;
+        *((__pyx_t_24multi_feature_hashing_cy_DTYPE_t *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_X_hashed_view.data + __pyx_t_23 * __pyx_v_X_hashed_view.strides[0]) ) + __pyx_t_25 * __pyx_v_X_hashed_view.strides[1]) )) += __pyx_v_value;
       }
     }
   }
 
-  /* "multi_feature_hashing_cy.pyx":46
+  /* "multi_feature_hashing_cy.pyx":49
  *                 X_hashed_view[i, hash_val] += value
  * 
  *     return X_hashed             # <<<<<<<<<<<<<<
@@ -20342,7 +20417,7 @@ static PyObject *__pyx_pf_24multi_feature_hashing_cy_multi_feature_hashing_cy(CY
   /* "multi_feature_hashing_cy.pyx":7
  * ctypedef np.int64_t ITYPE_t
  * 
- * def multi_feature_hashing_cy(             # <<<<<<<<<<<<<<
+ * def mfh_transform(             # <<<<<<<<<<<<<<
  *     list X_hasher_input,
  *     int n_features,
  */
@@ -20353,10 +20428,10 @@ static PyObject *__pyx_pf_24multi_feature_hashing_cy_multi_feature_hashing_cy(CY
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_4);
   __Pyx_XDECREF(__pyx_t_5);
-  __Pyx_XDECREF(__pyx_t_6);
-  __PYX_XCLEAR_MEMVIEW(&__pyx_t_8, 1);
-  __PYX_XCLEAR_MEMVIEW(&__pyx_t_9, 1);
+  __Pyx_XDECREF(__pyx_t_8);
   __PYX_XCLEAR_MEMVIEW(&__pyx_t_10, 1);
+  __PYX_XCLEAR_MEMVIEW(&__pyx_t_11, 1);
+  __PYX_XCLEAR_MEMVIEW(&__pyx_t_12, 1);
   { PyObject *__pyx_type, *__pyx_value, *__pyx_tb;
     __Pyx_PyThreadState_declare
     __Pyx_PyThreadState_assign
@@ -20365,7 +20440,7 @@ static PyObject *__pyx_pf_24multi_feature_hashing_cy_multi_feature_hashing_cy(CY
     __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_hashes.rcbuffer->pybuffer);
     __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_signs.rcbuffer->pybuffer);
   __Pyx_ErrRestore(__pyx_type, __pyx_value, __pyx_tb);}
-  __Pyx_AddTraceback("multi_feature_hashing_cy.multi_feature_hashing_cy", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("multi_feature_hashing_cy.mfh_transform", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   goto __pyx_L2;
   __pyx_L0:;
@@ -21455,10 +21530,12 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_k, __pyx_k_k, sizeof(__pyx_k_k), 0, 0, 1, 1},
     {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
     {&__pyx_n_s_memview, __pyx_k_memview, sizeof(__pyx_k_memview), 0, 0, 1, 1},
+    {&__pyx_n_s_mfh_transform, __pyx_k_mfh_transform, sizeof(__pyx_k_mfh_transform), 0, 0, 1, 1},
     {&__pyx_n_s_mode, __pyx_k_mode, sizeof(__pyx_k_mode), 0, 0, 1, 1},
     {&__pyx_n_s_multi_feature_hashing_cy, __pyx_k_multi_feature_hashing_cy, sizeof(__pyx_k_multi_feature_hashing_cy), 0, 0, 1, 1},
     {&__pyx_kp_s_multi_feature_hashing_cy_pyx, __pyx_k_multi_feature_hashing_cy_pyx, sizeof(__pyx_k_multi_feature_hashing_cy_pyx), 0, 0, 1, 0},
     {&__pyx_n_s_n_features, __pyx_k_n_features, sizeof(__pyx_k_n_features), 0, 0, 1, 1},
+    {&__pyx_n_s_n_features_mask, __pyx_k_n_features_mask, sizeof(__pyx_k_n_features_mask), 0, 0, 1, 1},
     {&__pyx_n_s_n_hashes, __pyx_k_n_hashes, sizeof(__pyx_k_n_hashes), 0, 0, 1, 1},
     {&__pyx_n_s_n_samples, __pyx_k_n_samples, sizeof(__pyx_k_n_samples), 0, 0, 1, 1},
     {&__pyx_n_s_name, __pyx_k_name, sizeof(__pyx_k_name), 0, 0, 1, 1},
@@ -21486,6 +21563,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_reduce_ex, __pyx_k_reduce_ex, sizeof(__pyx_k_reduce_ex), 0, 0, 1, 1},
     {&__pyx_n_s_register, __pyx_k_register, sizeof(__pyx_k_register), 0, 0, 1, 1},
     {&__pyx_n_s_row, __pyx_k_row, sizeof(__pyx_k_row), 0, 0, 1, 1},
+    {&__pyx_n_s_scaling_factor, __pyx_k_scaling_factor, sizeof(__pyx_k_scaling_factor), 0, 0, 1, 1},
     {&__pyx_n_s_setstate, __pyx_k_setstate, sizeof(__pyx_k_setstate), 0, 0, 1, 1},
     {&__pyx_n_s_setstate_cython, __pyx_k_setstate_cython, sizeof(__pyx_k_setstate_cython), 0, 0, 1, 1},
     {&__pyx_n_s_shape, __pyx_k_shape, sizeof(__pyx_k_shape), 0, 0, 1, 1},
@@ -21493,6 +21571,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_signs_view, __pyx_k_signs_view, sizeof(__pyx_k_signs_view), 0, 0, 1, 1},
     {&__pyx_n_s_size, __pyx_k_size, sizeof(__pyx_k_size), 0, 0, 1, 1},
     {&__pyx_n_s_spec, __pyx_k_spec, sizeof(__pyx_k_spec), 0, 0, 1, 1},
+    {&__pyx_n_s_sqrt, __pyx_k_sqrt, sizeof(__pyx_k_sqrt), 0, 0, 1, 1},
     {&__pyx_n_s_start, __pyx_k_start, sizeof(__pyx_k_start), 0, 0, 1, 1},
     {&__pyx_n_s_step, __pyx_k_step, sizeof(__pyx_k_step), 0, 0, 1, 1},
     {&__pyx_n_s_stop, __pyx_k_stop, sizeof(__pyx_k_stop), 0, 0, 1, 1},
@@ -21516,8 +21595,8 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
 }
 /* #### Code section: cached_builtins ### */
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 32, __pyx_L1_error)
-  __pyx_builtin_enumerate = __Pyx_GetBuiltinName(__pyx_n_s_enumerate); if (!__pyx_builtin_enumerate) __PYX_ERR(0, 30, __pyx_L1_error)
+  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 35, __pyx_L1_error)
+  __pyx_builtin_enumerate = __Pyx_GetBuiltinName(__pyx_n_s_enumerate); if (!__pyx_builtin_enumerate) __PYX_ERR(0, 31, __pyx_L1_error)
   __pyx_builtin___import__ = __Pyx_GetBuiltinName(__pyx_n_s_import); if (!__pyx_builtin___import__) __PYX_ERR(1, 100, __pyx_L1_error)
   __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(1, 141, __pyx_L1_error)
   __pyx_builtin_MemoryError = __Pyx_GetBuiltinName(__pyx_n_s_MemoryError); if (!__pyx_builtin_MemoryError) __PYX_ERR(1, 156, __pyx_L1_error)
@@ -21699,14 +21778,14 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   /* "multi_feature_hashing_cy.pyx":7
  * ctypedef np.int64_t ITYPE_t
  * 
- * def multi_feature_hashing_cy(             # <<<<<<<<<<<<<<
+ * def mfh_transform(             # <<<<<<<<<<<<<<
  *     list X_hasher_input,
  *     int n_features,
  */
-  __pyx_tuple__22 = PyTuple_Pack(23, __pyx_n_s_X_hasher_input, __pyx_n_s_n_features, __pyx_n_s_hashes, __pyx_n_s_signs, __pyx_n_s_feature_names, __pyx_n_s_i, __pyx_n_s_j, __pyx_n_s_k, __pyx_n_s_n_samples, __pyx_n_s_n_hashes, __pyx_n_s_X_hashed, __pyx_n_s_X_hashed_view, __pyx_n_s_hashes_view, __pyx_n_s_signs_view, __pyx_n_s_row, __pyx_n_s_feature_value, __pyx_n_s_feature, __pyx_n_s_feat_idx, __pyx_n_s_value, __pyx_n_s_hash_val, __pyx_n_s_feature_map, __pyx_n_s_idx, __pyx_n_s_name); if (unlikely(!__pyx_tuple__22)) __PYX_ERR(0, 7, __pyx_L1_error)
+  __pyx_tuple__22 = PyTuple_Pack(25, __pyx_n_s_X_hasher_input, __pyx_n_s_n_features, __pyx_n_s_hashes, __pyx_n_s_signs, __pyx_n_s_feature_names, __pyx_n_s_i, __pyx_n_s_j, __pyx_n_s_k, __pyx_n_s_n_samples, __pyx_n_s_n_hashes, __pyx_n_s_scaling_factor, __pyx_n_s_X_hashed, __pyx_n_s_X_hashed_view, __pyx_n_s_hashes_view, __pyx_n_s_signs_view, __pyx_n_s_row, __pyx_n_s_feature_value, __pyx_n_s_feature, __pyx_n_s_feat_idx, __pyx_n_s_value, __pyx_n_s_hash_val, __pyx_n_s_feature_map, __pyx_n_s_n_features_mask, __pyx_n_s_idx, __pyx_n_s_name); if (unlikely(!__pyx_tuple__22)) __PYX_ERR(0, 7, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__22);
   __Pyx_GIVEREF(__pyx_tuple__22);
-  __pyx_codeobj__23 = (PyObject*)__Pyx_PyCode_New(5, 0, 0, 23, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__22, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_multi_feature_hashing_cy_pyx, __pyx_n_s_multi_feature_hashing_cy, 7, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__23)) __PYX_ERR(0, 7, __pyx_L1_error)
+  __pyx_codeobj__23 = (PyObject*)__Pyx_PyCode_New(5, 0, 0, 25, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__22, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_multi_feature_hashing_cy_pyx, __pyx_n_s_mfh_transform, 7, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__23)) __PYX_ERR(0, 7, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -22827,13 +22906,13 @@ if (!__Pyx_RefNanny) {
   /* "multi_feature_hashing_cy.pyx":7
  * ctypedef np.int64_t ITYPE_t
  * 
- * def multi_feature_hashing_cy(             # <<<<<<<<<<<<<<
+ * def mfh_transform(             # <<<<<<<<<<<<<<
  *     list X_hasher_input,
  *     int n_features,
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_24multi_feature_hashing_cy_1multi_feature_hashing_cy, 0, __pyx_n_s_multi_feature_hashing_cy, NULL, __pyx_n_s_multi_feature_hashing_cy, __pyx_d, ((PyObject *)__pyx_codeobj__23)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 7, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_24multi_feature_hashing_cy_1mfh_transform, 0, __pyx_n_s_mfh_transform, NULL, __pyx_n_s_multi_feature_hashing_cy, __pyx_d, ((PyObject *)__pyx_codeobj__23)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 7, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_multi_feature_hashing_cy, __pyx_t_7) < 0) __PYX_ERR(0, 7, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_mfh_transform, __pyx_t_7) < 0) __PYX_ERR(0, 7, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
   /* "multi_feature_hashing_cy.pyx":1
@@ -25926,13 +26005,6 @@ static PyObject *__Pyx_PyDict_GetItem(PyObject *d, PyObject* key) {
   static void __Pyx_RaiseBufferIndexError(int axis) {
   PyErr_Format(PyExc_IndexError,
      "Out of bounds on buffer access (axis %d)", axis);
-}
-
-/* ModInt[__pyx_t_24multi_feature_hashing_cy_ITYPE_t] */
-  static CYTHON_INLINE __pyx_t_24multi_feature_hashing_cy_ITYPE_t __Pyx_mod___pyx_t_24multi_feature_hashing_cy_ITYPE_t(__pyx_t_24multi_feature_hashing_cy_ITYPE_t a, __pyx_t_24multi_feature_hashing_cy_ITYPE_t b) {
-    __pyx_t_24multi_feature_hashing_cy_ITYPE_t r = a % b;
-    r += ((r != 0) & ((r ^ b) < 0)) * b;
-    return r;
 }
 
 /* PyObject_GenericGetAttrNoDict */

@@ -1,2 +1,11 @@
 venv
 /FeatureHashing_draft
+/__pycache__/
+/build/
+**/__pycache__/
+**/build/
+*.pyd
+*.c
+*.cpp
+*.csv
+*.json
